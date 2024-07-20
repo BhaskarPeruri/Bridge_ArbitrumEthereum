@@ -6,7 +6,7 @@ import {Script} from "forge-std/Script.sol";
 import {EthereumOFT} from "../contracts/EthereumStableCoinOFT.sol";
 
 
-contract DeployOnEthereum is Script{
+contract DeployOnEthereumOFT is Script{
 
 
     function run() external{

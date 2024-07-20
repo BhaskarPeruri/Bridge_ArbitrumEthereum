@@ -2,7 +2,7 @@
 pragma solidity ^0.8.20;
 
 // Mock imports
-import { OFTMock } from "../mocks/OFTMock.sol";
+import { EthereumOFTMock } from "../../contracts/mocks/EthereumOFTMock.sol";
 import { ERC20Mock } from "../mocks/ERC20Mock.sol";
 import { OFTComposerMock } from "../mocks/OFTComposerMock.sol";
 
@@ -25,14 +25,14 @@ import "forge-std/console.sol";
 // DevTools imports
 import { TestHelperOz5 } from "@layerzerolabs/test-devtools-evm-foundry/contracts/TestHelperOz5.sol";
 
-contract MyOFTTest is TestHelperOz5 {
+contract EthereumOFT is TestHelperOz5 {
     using OptionsBuilder for bytes;
 
     uint32 private aEid = 1;
     uint32 private bEid = 2;
 
-    OFTMock private aOFT;
-    OFTMock private bOFT;
+    EthereumOFTMock private aOFT;
+    EthereumOFTMock private bOFT;
 
     address private userA = address(0x1);
     address private userB = address(0x2);
@@ -45,12 +45,12 @@ contract MyOFTTest is TestHelperOz5 {
         super.setUp();
         setUpEndpoints(2, LibraryType.UltraLightNode);
 
-        aOFT = OFTMock(
-            _deployOApp(type(OFTMock).creationCode, abi.encode("aOFT", "aOFT", address(endpoints[aEid]), address(this)))
+        aOFT = EthereumOFTMock(
+            _deployOApp(type(EthereumOFTMock).creationCode, abi.encode("aOFT", "aOFT", address(endpoints[aEid]), address(this)))
         );
 
-        bOFT = OFTMock(
-            _deployOApp(type(OFTMock).creationCode, abi.encode("bOFT", "bOFT", address(endpoints[bEid]), address(this)))
+        bOFT = EthereumOFTMock(
+            _deployOApp(type(EthereumOFTMock).creationCode, abi.encode("bOFT", "bOFT", address(endpoints[bEid]), address(this)))
         );
 
         // config and wire the ofts
@@ -153,8 +153,6 @@ contract MyOFTTest is TestHelperOz5 {
         assertEq(composer.guid(), guid_);
         assertEq(composer.message(), composerMsg_);
         assertEq(composer.executor(), address(this));
-        assertEq(composer.extraData(), composerMsg_); // default to setting the extraData to the message as well to test
+        assertEq(composer.extraData(), composerMsg_); 
     }
-
-    // TODO import the rest of oft tests?
 }

@@ -11,6 +11,5 @@ contract EthereumOFT is OFT {
         address _lzEndpoint,
         address _delegate
     ) OFT(_name, _symbol, _lzEndpoint, _delegate) Ownable(_delegate) {
-        _mint(msg.sender, 1000000 * 10 ** decimals());
     }
 }

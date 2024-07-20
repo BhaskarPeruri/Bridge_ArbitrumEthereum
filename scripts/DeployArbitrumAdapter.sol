@@ -4,7 +4,7 @@ pragma solidity ^0.8.22;
 import {Script} from "forge-std/Script.sol";
 import {ArbitrumAdapter} from "../contracts/ArbitrumStableCoinAdapter.sol";
 
-contract DeployOnArbitrum is Script{
+contract DeployArbitrumAdapter is Script{
 
    
 
